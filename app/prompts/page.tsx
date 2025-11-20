@@ -14,28 +14,30 @@ export default function PromptsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
       <div className="max-w-7xl mx-auto px-4">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4 text-center">AI Prompts Library</h1>
-        <p className="text-xl text-gray-600 mb-12 text-center">500+ curated prompts for ChatGPT, Claude, and more</p>
+        <div className="text-center mb-12 animate-fade-in">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">AI Prompts Library</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400">500+ curated prompts for ChatGPT, Claude, and more</p>
+        </div>
 
-        <div className="max-w-2xl mx-auto mb-12">
+        <div className="max-w-2xl mx-auto mb-12 animate-slide-up">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
               placeholder="Search prompts..."
-              className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 text-lg"
+              className="input pl-12 text-lg shadow-soft focus:shadow-glow"
             />
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((cat, index) => (
-            <div key={index} className="bg-white rounded-xl p-6 shadow-md hover:shadow-2xl transition-all hover:-translate-y-1 cursor-pointer">
-              <div className="text-4xl mb-4">{cat.icon}</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{cat.name}</h3>
-              <p className="text-gray-600">{cat.count} prompts</p>
+            <div key={index} className="card card-hover group p-8 cursor-pointer text-center animate-scale-in" style={{ animationDelay: `${index * 50}ms` }}>
+              <div className="text-5xl mb-5 group-hover:scale-110 transition-transform">{cat.icon}</div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{cat.name}</h3>
+              <p className="text-gray-600 dark:text-gray-400 font-medium">{cat.count} prompts</p>
             </div>
           ))}
         </div>

@@ -1,1 +1,9 @@
-{}
+{
+  "/resume/page": "app/resume/page.js",
+  "/blog/page": "app/blog/page.js",
+  "/prompts/page": "app/prompts/page.js",
+  "/compare/page": "app/compare/page.js",
+  "/page": "app/page.js",
+  "/errors/page": "app/errors/page.js",
+  "/tools/page": "app/tools/page.js"
+}

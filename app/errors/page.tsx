@@ -15,34 +15,36 @@ export default function ErrorsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
       <div className="max-w-7xl mx-auto px-4">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4 text-center">Error Solutions Database</h1>
-        <p className="text-xl text-gray-600 mb-12 text-center">1000+ common errors with detailed solutions</p>
+        <div className="text-center mb-12 animate-fade-in">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">Error Solutions Database</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400">1000+ common errors with detailed solutions</p>
+        </div>
 
-        <div className="max-w-2xl mx-auto mb-8">
+        <div className="max-w-2xl mx-auto mb-12 animate-slide-up">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
               placeholder="Search for error message..."
-              className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 text-lg"
+              className="input pl-12 text-lg shadow-soft focus:shadow-glow"
             />
           </div>
         </div>
 
         <div className="space-y-4">
           {errors.map((item, index) => (
-            <div key={index} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition">
-              <div className="flex justify-between items-start">
-                <div>
-                  <code className="text-red-600 font-mono text-sm">{item.error}</code>
-                  <div className="mt-2 flex gap-4">
-                    <span className="text-sm text-gray-600">{item.language}</span>
-                    <span className="text-sm text-blue-600">{item.solutions} solutions</span>
+            <div key={index} className="card group hover:scale-[1.01] transition-all p-6 animate-slide-up" style={{ animationDelay: `${index * 100}ms` }}>
+              <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
+                <div className="flex-1">
+                  <code className="text-red-600 dark:text-red-400 font-mono text-sm bg-red-50 dark:bg-red-900/20 px-3 py-1.5 rounded-lg block">{item.error}</code>
+                  <div className="mt-3 flex gap-4">
+                    <span className="text-sm font-medium text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-lg">{item.language}</span>
+                    <span className="text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-lg">{item.solutions} solutions</span>
                   </div>
                 </div>
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-semibold">
+                <button className="btn btn-primary text-sm whitespace-nowrap">
                   View Solutions
                 </button>
               </div>

@@ -38,8 +38,6 @@ export default function ComparePage() {
     },
     {
       name: 'Python vs JavaScript',
-      tech1: 'Python',
-      tech2: 'JavaScript',
       category: 'Languages',
       icon1: '🐍',
       icon2: '📜',
@@ -54,14 +52,6 @@ export default function ComparePage() {
       },
       pros1: ['Clean syntax', 'Great for AI/ML', 'Extensive libraries'],
       pros2: ['Browser native', 'Full-stack', 'Async by nature'],
-      cons1: ['Slower execution', 'Limited mobile development', 'GIL for threading'],
-      cons2: ['Callback hell', 'Type coercion issues', 'Browser compatibility'],
-      install1: '# Ubuntu/Debian\nsudo apt install python3 python3-pip\n\n# macOS\nbrew install python3\n\n# Windows\n# Download from python.org',
-      install2: '# Install Node.js (includes npm)\n# Ubuntu/Debian\nsudo apt install nodejs npm\n\n# macOS\nbrew install node\n\n# Windows\n# Download from nodejs.org',
-      docs1: 'https://docs.python.org',
-      docs2: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
-      useCase1: 'Data science, AI/ML, automation, backend development',
-      useCase2: 'Web development, full-stack apps, real-time applications'
     },
     {
       name: 'MongoDB vs PostgreSQL',
@@ -177,8 +167,7 @@ export default function ComparePage() {
           {filteredComparisons.map((comp, index) => (
             <div
               key={index}
-              onClick={() => setSelectedComparison(comp)}
-              className="card p-6 animate-scale-in hover:scale-[1.02] transition-transform cursor-pointer"
+              className="card p-6 animate-scale-in hover:scale-[1.02] transition-transform"
               style={{ animationDelay: `${index * 50}ms` }}
             >
               {/* Header */}
@@ -294,188 +283,6 @@ export default function ComparePage() {
             Request Comparison
           </button>
         </div>
-
-        {/* Detailed Comparison Modal */}
-        {selectedComparison && (
-          <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in"
-            onClick={() => setSelectedComparison(null)}
-          >
-            <div
-              className="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-scale-in"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Modal Header */}
-              <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-purple-600 p-6 rounded-t-2xl flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className={`w-12 h-12 bg-gradient-to-br ${selectedComparison.color1} rounded-xl flex items-center justify-center text-2xl`}>
-                    {selectedComparison.icon1}
-                  </div>
-                  <span className="text-2xl font-bold text-white">VS</span>
-                  <div className={`w-12 h-12 bg-gradient-to-br ${selectedComparison.color2} rounded-xl flex items-center justify-center text-2xl`}>
-                    {selectedComparison.icon2}
-                  </div>
-                </div>
-                <button
-                  onClick={() => setSelectedComparison(null)}
-                  className="text-white hover:bg-white/20 rounded-lg p-2 transition-colors"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="p-8">
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-                  {selectedComparison.name}
-                </h2>
-
-                {/* Installation Steps */}
-                {selectedComparison.install1 && (
-                  <div className="grid md:grid-cols-2 gap-6 mb-8">
-                    <div className="card p-6">
-                      <div className="flex items-center gap-2 mb-4">
-                        <Download className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                          Install {selectedComparison.tech1 || selectedComparison.name.split(' vs ')[0]}
-                        </h3>
-                      </div>
-                      <pre className="bg-gray-900 dark:bg-black p-4 rounded-lg overflow-x-auto">
-                        <code className="text-green-400 text-sm">{selectedComparison.install1}</code>
-                      </pre>
-                    </div>
-                    <div className="card p-6">
-                      <div className="flex items-center gap-2 mb-4">
-                        <Download className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                          Install {selectedComparison.tech2 || selectedComparison.name.split(' vs ')[1]}
-                        </h3>
-                      </div>
-                      <pre className="bg-gray-900 dark:bg-black p-4 rounded-lg overflow-x-auto">
-                        <code className="text-green-400 text-sm">{selectedComparison.install2}</code>
-                      </pre>
-                    </div>
-                  </div>
-                )}
-
-                {/* Pros & Cons */}
-                <div className="grid md:grid-cols-2 gap-6 mb-8">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                      {selectedComparison.tech1 || selectedComparison.name.split(' vs ')[0]}
-                    </h3>
-                    <div className="space-y-4">
-                      <div>
-                        <h4 className="font-semibold text-green-600 dark:text-green-400 mb-2 flex items-center gap-2">
-                          <CheckCircle className="w-5 h-5" />
-                          Pros
-                        </h4>
-                        <ul className="space-y-1">
-                          {selectedComparison.pros1.map((pro: string, i: number) => (
-                            <li key={i} className="text-gray-700 dark:text-gray-300 flex items-start gap-2">
-                              <span className="text-green-500 mt-1">✓</span>
-                              {pro}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      {selectedComparison.cons1 && (
-                        <div>
-                          <h4 className="font-semibold text-red-600 dark:text-red-400 mb-2 flex items-center gap-2">
-                            <XCircle className="w-5 h-5" />
-                            Cons
-                          </h4>
-                          <ul className="space-y-1">
-                            {selectedComparison.cons1.map((con: string, i: number) => (
-                              <li key={i} className="text-gray-700 dark:text-gray-300 flex items-start gap-2">
-                                <span className="text-red-500 mt-1">✗</span>
-                                {con}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                      {selectedComparison.tech2 || selectedComparison.name.split(' vs ')[1]}
-                    </h3>
-                    <div className="space-y-4">
-                      <div>
-                        <h4 className="font-semibold text-green-600 dark:text-green-400 mb-2 flex items-center gap-2">
-                          <CheckCircle className="w-5 h-5" />
-                          Pros
-                        </h4>
-                        <ul className="space-y-1">
-                          {selectedComparison.pros2.map((pro: string, i: number) => (
-                            <li key={i} className="text-gray-700 dark:text-gray-300 flex items-start gap-2">
-                              <span className="text-green-500 mt-1">✓</span>
-                              {pro}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      {selectedComparison.cons2 && (
-                        <div>
-                          <h4 className="font-semibold text-red-600 dark:text-red-400 mb-2 flex items-center gap-2">
-                            <XCircle className="w-5 h-5" />
-                            Cons
-                          </h4>
-                          <ul className="space-y-1">
-                            {selectedComparison.cons2.map((con: string, i: number) => (
-                              <li key={i} className="text-gray-700 dark:text-gray-300 flex items-start gap-2">
-                                <span className="text-red-500 mt-1">✗</span>
-                                {con}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Use Cases */}
-                {selectedComparison.useCase1 && (
-                  <div className="grid md:grid-cols-2 gap-6 mb-8">
-                    <div className="card p-6 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
-                      <h4 className="font-bold text-blue-900 dark:text-blue-300 mb-2">Best For:</h4>
-                      <p className="text-blue-800 dark:text-blue-400">{selectedComparison.useCase1}</p>
-                    </div>
-                    <div className="card p-6 bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800">
-                      <h4 className="font-bold text-purple-900 dark:text-purple-300 mb-2">Best For:</h4>
-                      <p className="text-purple-800 dark:text-purple-400">{selectedComparison.useCase2}</p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Documentation Links */}
-                {selectedComparison.docs1 && (
-                  <div className="flex gap-4 justify-center">
-                    <a
-                      href={selectedComparison.docs1}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-primary"
-                    >
-                      {selectedComparison.tech1 || selectedComparison.name.split(' vs ')[0]} Docs →
-                    </a>
-                    <a
-                      href={selectedComparison.docs2}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-secondary"
-                    >
-                      {selectedComparison.tech2 || selectedComparison.name.split(' vs ')[1]} Docs →
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
