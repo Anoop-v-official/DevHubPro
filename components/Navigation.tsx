@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Home, Wrench, Scale, AlertCircle, Sparkles, FileText, BookOpen, Search, Sun, Moon } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { Menu, X, Home, Wrench, Scale, AlertCircle, Sparkles, FileText, BookOpen, Search, Sun, Moon, Book, Shield } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
 export default function Navigation() {
@@ -10,15 +11,18 @@ export default function Navigation() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { theme, toggleTheme } = useTheme();
+  const pathname = usePathname();
 
   const menuItems = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Tools', href: '/tools', icon: Wrench },
+    { name: 'Blog', href: '/blog', icon: BookOpen },
     { name: 'Compare', href: '/compare', icon: Scale },
+    { name: 'Cheatsheets', href: '/cheatsheets', icon: Book },
+    { name: 'Ethical Hacking', href: '/ethical-hacking', icon: Shield },
     { name: 'Errors', href: '/errors', icon: AlertCircle },
     { name: 'AI Prompts', href: '/prompts', icon: Sparkles },
     { name: 'Resume', href: '/resume', icon: FileText },
-    { name: 'Blog', href: '/blog', icon: BookOpen },
   ];
 
   const handleSearch = (e: React.FormEvent) => {
@@ -43,18 +47,25 @@ export default function Navigation() {
             </span>
           </Link>
 
-          <div className="flex items-center space-x-1">
-            {menuItems.map((item) => {
+          <div className="flex items-center gap-1">
+            {menuItems.slice(0, 7).map((item) => {
               const Icon = item.icon;
+              const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
               return (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="group px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 transition-all flex items-center space-x-2 font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 relative"
+                  className={`group px-3 py-2 rounded-xl transition-all flex items-center gap-1.5 font-medium text-sm relative whitespace-nowrap ${
+                    isActive
+                      ? 'bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-blue-600 dark:text-blue-400'
+                      : 'text-gray-700 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 hover:text-blue-600 dark:hover:text-blue-400'
+                  }`}
                 >
                   <Icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
                   <span>{item.name}</span>
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
+                  <span className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 ${
+                    isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></span>
                 </Link>
               );
             })}
@@ -160,11 +171,16 @@ export default function Navigation() {
           <div className="px-4 py-3 space-y-1">
             {menuItems.map((item) => {
               const Icon = item.icon;
+              const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
               return (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-all group"
+                  className={`flex items-center space-x-3 px-4 py-3 rounded-xl font-medium transition-all group ${
+                    isActive
+                      ? 'bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-blue-600 dark:text-blue-400'
+                      : 'text-gray-700 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 hover:text-blue-600 dark:hover:text-blue-400'
+                  }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" />

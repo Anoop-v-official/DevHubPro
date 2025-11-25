@@ -1,10 +1,8 @@
-import Link from 'next/link';
-import { Search } from 'lucide-react';
+'use client';
 
-export const metadata = {
-  title: 'Free Developer Tools | DevHub Pro',
-  description: 'Access 50+ free developer tools including formatters, converters, generators, and more.',
-};
+import Link from 'next/link';
+import { Search, MessageCircle } from 'lucide-react';
+import BookmarkButton from '@/components/BookmarkButton';
 
 export default function ToolsPage() {
   const tools = [
@@ -83,7 +81,7 @@ export default function ToolsPage() {
       description: 'Calculate network ranges, subnet masks, and IP information',
       href: '/tools/cidr-calculator',
       icon: '🌐',
-      category: 'DevOps',
+      category: 'Networking',
       popular: true,
       usageCount: '17.2K',
       rank: 8
@@ -110,7 +108,7 @@ export default function ToolsPage() {
     },
   ];
 
-  const categories = ['All', 'Formatters', 'Converters', 'Security', 'Generators', 'DevOps', 'Ethical Hacking'];
+  const categories = ['All', 'Formatters', 'Converters', 'Security', 'Generators', 'DevOps', 'Networking', 'Ethical Hacking'];
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
@@ -152,9 +150,8 @@ export default function ToolsPage() {
         {/* Tools Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {tools.map((tool, index) => (
-            <Link
+            <div
               key={index}
-              href={tool.href}
               className="card card-hover group p-6 animate-scale-in relative overflow-hidden"
               style={{ animationDelay: `${index * 50}ms` }}
             >
@@ -171,12 +168,14 @@ export default function ToolsPage() {
                 </div>
               )}
 
-              <div className="flex items-start space-x-4">
+              <div className="flex items-start space-x-4 mb-4">
                 <div className="text-5xl group-hover:scale-110 transition-transform">{tool.icon}</div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    {tool.name}
-                  </h3>
+                  <Link href={tool.href}>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      {tool.name}
+                    </h3>
+                  </Link>
                   <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 leading-relaxed">
                     {tool.description}
                   </p>
@@ -194,7 +193,24 @@ export default function ToolsPage() {
                   </div>
                 </div>
               </div>
-            </Link>
+
+              {/* Bookmark and Visit Buttons */}
+              <div className="flex items-center gap-2">
+                <BookmarkButton
+                  type="tool"
+                  itemId={tool.href}
+                  itemTitle={tool.name}
+                  itemUrl={tool.href}
+                  className="flex-1"
+                />
+                <Link
+                  href={tool.href}
+                  className="flex-1 text-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium"
+                >
+                  Open Tool
+                </Link>
+              </div>
+            </div>
           ))}
         </div>
 
@@ -209,9 +225,13 @@ export default function ToolsPage() {
             <p className="text-lg mb-8 text-blue-100 dark:text-blue-200 max-w-2xl mx-auto">
               We're constantly adding new tools. Request a tool and we'll build it!
             </p>
-            <button className="btn bg-white text-purple-600 hover:bg-gray-100 hover:scale-105 font-bold shadow-xl hover:shadow-2xl">
+            <a
+              href="mailto:contact@devhubpro.com?subject=Tool Request"
+              className="btn bg-white text-purple-600 hover:bg-gray-100 hover:scale-105 font-bold shadow-xl hover:shadow-2xl inline-flex items-center gap-2"
+            >
+              <MessageCircle className="w-5 h-5" />
               Request a Tool
-            </button>
+            </a>
           </div>
         </div>
       </div>

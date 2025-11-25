@@ -38,40 +38,40 @@ export default function HashGeneratorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
       <div className="max-w-7xl mx-auto px-4">
-        <Link href="/tools" className="text-blue-600 hover:text-blue-700 mb-6 inline-block">
+        <Link href="/tools" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 mb-6 inline-block">
           ← Back to Tools
         </Link>
 
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">🔒 Hash Generator</h1>
-        <p className="text-xl text-gray-600 mb-8">Generate cryptographic hashes</p>
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">🔒 Hash Generator</h1>
+        <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">Generate cryptographic hashes</p>
 
-        <div className="bg-white rounded-xl shadow-lg p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
           <div>
-            <label className="block font-semibold text-gray-900 mb-2">Input Text</label>
+            <label className="block font-semibold text-gray-900 dark:text-white mb-2">Input Text</label>
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Enter text to hash..."
-              className="w-full h-32 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:outline-none focus:border-blue-500"
+              className="w-full h-32 p-4 border-2 border-gray-300 dark:border-gray-600 rounded-lg font-mono text-sm focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             />
           </div>
 
           {sha256 && (
             <div className="mt-8 space-y-4">
-              <div className="p-4 bg-gray-50 rounded-lg">
+              <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                 <div className="flex justify-between items-center mb-2">
-                  <h3 className="font-bold text-gray-900">SHA-256</h3>
+                  <h3 className="font-bold text-gray-900 dark:text-white">SHA-256</h3>
                   <button
                     onClick={() => copyHash(sha256, 'sha256')}
-                    className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                    className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-1"
                   >
                     {copied === 'sha256' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                     {copied === 'sha256' ? 'Copied!' : 'Copy'}
                   </button>
                 </div>
-                <code className="text-sm break-all">{sha256}</code>
+                <code className="text-sm break-all text-gray-900 dark:text-gray-100">{sha256}</code>
               </div>
             </div>
           )}

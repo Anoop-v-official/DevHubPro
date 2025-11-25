@@ -3,7 +3,9 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import ScrollToTop from '@/components/ScrollToTop'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import AuthProvider from '@/components/AuthProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,13 +22,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
-        <ThemeProvider>
-          <Navigation />
-          <main className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors">
-            {children}
-          </main>
-          <Footer />
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider>
+            <Navigation />
+            <main className="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors">
+              {children}
+            </main>
+            <Footer />
+            <ScrollToTop />
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )

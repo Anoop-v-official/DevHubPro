@@ -45,7 +45,12 @@ export default function SSHKeyGenPage() {
   };
 
   const arrayBufferToPem = (buffer: ArrayBuffer, type: string) => {
-    const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+    const uint8Array = new Uint8Array(buffer);
+    let binary = '';
+    for (let i = 0; i < uint8Array.length; i++) {
+      binary += String.fromCharCode(uint8Array[i]);
+    }
+    const base64 = btoa(binary);
     const formatted = base64.match(/.{1,64}/g)?.join('\n') || base64;
     return `-----BEGIN ${type}-----\n${formatted}\n-----END ${type}-----`;
   };

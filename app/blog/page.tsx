@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { BookOpen, Clock, Calendar, TrendingUp, Star, X } from 'lucide-react';
+import Link from 'next/link';
+import { BookOpen, Clock, Calendar, TrendingUp, Star, X, Plus } from 'lucide-react';
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -88,9 +89,16 @@ export default function BlogPage() {
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
             Developer Blog
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-6">
             Tips, tutorials, and insights for modern developers
           </p>
+          <a
+            href="mailto:contact@devhubpro.com?subject=Article Submission"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:scale-105 transition-transform shadow-lg hover:shadow-glow"
+          >
+            <Plus className="w-5 h-5" />
+            Submit Article
+          </a>
         </div>
 
         {/* Category Filter */}
@@ -183,9 +191,13 @@ export default function BlogPage() {
           <p className="text-lg text-blue-100 dark:text-blue-200 mb-6">
             Share your knowledge with the developer community
           </p>
-          <button className="btn bg-white text-purple-600 hover:bg-gray-100 font-bold shadow-xl hover:shadow-2xl">
+          <a
+            href="mailto:contact@devhubpro.com?subject=Article Submission"
+            className="btn bg-white text-purple-600 hover:bg-gray-100 font-bold shadow-xl hover:shadow-2xl inline-flex items-center gap-2"
+          >
+            <Plus className="w-5 h-5" />
             Submit Article
-          </button>
+          </a>
         </div>
 
         {/* Blog Post Modal */}

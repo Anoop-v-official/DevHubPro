@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Code, Database, Cloud, Terminal, CheckCircle, XCircle, TrendingUp, Users, Star, X, Download } from 'lucide-react';
+import { Code, Database, Cloud, Terminal, CheckCircle, XCircle, TrendingUp, Users, Star, X, Download, MessageCircle } from 'lucide-react';
 
 export default function ComparePage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -290,9 +290,13 @@ export default function ComparePage() {
           <p className="text-lg text-blue-100 dark:text-blue-200 mb-6">
             Request a technology comparison and we'll add it to our database
           </p>
-          <button className="btn bg-white text-purple-600 hover:bg-gray-100 font-bold shadow-xl hover:shadow-2xl">
+          <a
+            href="mailto:contact@devhubpro.com?subject=Comparison Request"
+            className="btn bg-white text-purple-600 hover:bg-gray-100 font-bold shadow-xl hover:shadow-2xl inline-flex items-center gap-2"
+          >
+            <MessageCircle className="w-5 h-5" />
             Request Comparison
-          </button>
+          </a>
         </div>
 
         {/* Detailed Comparison Modal */}

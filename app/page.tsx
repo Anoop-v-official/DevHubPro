@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, Zap, Shield, TrendingUp, Star } from 'lucide-react';
+import { ArrowRight, Zap, Shield, TrendingUp, Star, BookOpen, AlertCircle, GitCompare, FileCode, Sparkles, Code, Users, Mail } from 'lucide-react';
 
 export default function Home() {
   const featuredTools = [
@@ -109,8 +109,7 @@ export default function Home() {
             </h1>
 
             <p className="text-xl md:text-2xl mb-10 text-blue-100 dark:text-blue-200 max-w-3xl mx-auto animate-slide-up leading-relaxed">
-              Access 50+ free tools, tech comparisons, error solutions, and AI prompts.
-              Everything you need to build amazing software.
+              Empowering Backend, Frontend, DevOps, Network Engineers, and all IT Professionals with 50+ free tools, comparisons, solutions, and resources.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
@@ -158,10 +157,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-              Popular Developer Tools
+              Most Popular Tools
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
-              Our most-used tools, trusted by developers worldwide
+              Trusted by Backend, Frontend, DevOps, Network Engineers & IT Professionals worldwide
             </p>
           </div>
 
@@ -236,6 +235,294 @@ export default function Home() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Popular Resources */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+              Popular Resources
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400">
+              Most accessed content by IT professionals
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Popular Blog Post */}
+            <Link href="/blog" className="card card-hover p-6 group">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-xl mb-4 group-hover:scale-110 transition-transform">
+                <BookOpen className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                Latest Articles
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
+                10 JavaScript Tips Every Developer Should Know
+              </p>
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
+                <TrendingUp className="w-4 h-4 text-green-500" />
+                <span>12.5K reads</span>
+              </div>
+            </Link>
+
+            {/* Popular Cheatsheet */}
+            <Link href="/cheatsheets" className="card card-hover p-6 group">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl mb-4 group-hover:scale-110 transition-transform">
+                <FileCode className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                Git Cheatsheet
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
+                Essential Git commands for daily development
+              </p>
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
+                <TrendingUp className="w-4 h-4 text-green-500" />
+                <span>45K views</span>
+              </div>
+            </Link>
+
+            {/* Popular Error Solution */}
+            <Link href="/errors" className="card card-hover p-6 group">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-red-600 to-orange-600 rounded-xl mb-4 group-hover:scale-110 transition-transform">
+                <AlertCircle className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
+                Top Error Fix
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
+                Cannot read property of undefined - Solutions
+              </p>
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
+                <TrendingUp className="w-4 h-4 text-green-500" />
+                <span>143 solutions</span>
+              </div>
+            </Link>
+
+            {/* Popular Comparison */}
+            <Link href="/compare" className="card card-hover p-6 group">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-green-600 to-teal-600 rounded-xl mb-4 group-hover:scale-110 transition-transform">
+                <GitCompare className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                Top Comparison
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
+                React vs Vue - Complete Framework Guide
+              </p>
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
+                <TrendingUp className="w-4 h-4 text-green-500" />
+                <span>28K views</span>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* New Tools Section */}
+      <section className="py-20 bg-white dark:bg-gray-950">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white font-semibold mb-4">
+              <Sparkles className="w-4 h-4" />
+              New This Week
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+              Recently Added
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400">
+              Fresh tools and resources added to help you code faster
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link href="/tools" className="card card-hover p-6 group">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl mb-4 group-hover:scale-110 transition-transform">
+                <Code className="w-7 h-7 text-white" />
+              </div>
+              <span className="inline-block px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold rounded-full mb-3">
+                NEW
+              </span>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                API Response Formatter
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Format and beautify API responses with syntax highlighting
+              </p>
+            </Link>
+
+            <Link href="/cheatsheets" className="card card-hover p-6 group">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-pink-600 to-red-600 rounded-xl mb-4 group-hover:scale-110 transition-transform">
+                <FileCode className="w-7 h-7 text-white" />
+              </div>
+              <span className="inline-block px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold rounded-full mb-3">
+                NEW
+              </span>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                Docker Commands
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Complete Docker cheatsheet for container management
+              </p>
+            </Link>
+
+            <Link href="/blog" className="card card-hover p-6 group">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-orange-600 to-yellow-600 rounded-xl mb-4 group-hover:scale-110 transition-transform">
+                <BookOpen className="w-7 h-7 text-white" />
+              </div>
+              <span className="inline-block px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold rounded-full mb-3">
+                NEW
+              </span>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                TypeScript Best Practices 2025
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Modern TypeScript patterns for enterprise applications
+              </p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+              Loved by Developers
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400">
+              See what the community is saying about DevHub Pro
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="card p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+              <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+                "DevHub Pro has become my go-to resource. The JSON formatter alone saves me hours every week. Fast, reliable, and completely free!"
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+                  SR
+                </div>
+                <div>
+                  <div className="font-semibold text-gray-900 dark:text-white">Sarah Rodriguez</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Full Stack Developer</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="card p-6 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+              <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+                "As a DevOps engineer, the CIDR calculator and SSH keygen tools are invaluable. Clean UI, works offline, and respects privacy."
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold">
+                  MK
+                </div>
+                <div>
+                  <div className="font-semibold text-gray-900 dark:text-white">Michael Kim</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">DevOps Engineer</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="card p-6 bg-gradient-to-br from-pink-50 to-orange-50 dark:from-pink-900/20 dark:to-orange-900/20">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+              <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+                "The tech comparisons helped me make informed decisions for my projects. Well-researched content with practical insights."
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-pink-600 to-orange-600 rounded-full flex items-center justify-center text-white font-bold">
+                  AP
+                </div>
+                <div>
+                  <div className="font-semibold text-gray-900 dark:text-white">Ananya Patel</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Backend Developer</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-20 bg-white dark:bg-gray-950">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="card p-8 md:p-12 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 dark:from-blue-900 dark:via-purple-900 dark:to-pink-900 border-none text-center text-white">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-2xl mb-6">
+              <Mail className="w-8 h-8 text-white" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Stay Updated
+            </h2>
+            <p className="text-lg text-blue-100 dark:text-blue-200 mb-8 max-w-2xl mx-auto">
+              Get weekly updates on new tools, tutorials, and developer resources delivered to your inbox
+            </p>
+            <a
+              href="mailto:contact@devhubpro.com?subject=Newsletter Subscription"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-purple-600 font-bold rounded-xl hover:bg-gray-100 hover:scale-105 transition-all shadow-xl hover:shadow-2xl"
+            >
+              <Mail className="w-5 h-5" />
+              Subscribe to Newsletter
+            </a>
+            <p className="text-sm text-blue-200 dark:text-blue-300 mt-4">
+              Join 25,000+ developers. No spam, unsubscribe anytime.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Community Stats */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="card p-8 md:p-12 bg-gradient-to-r from-gray-900 to-gray-800 dark:from-gray-800 dark:to-gray-700 text-white">
+            <div className="grid md:grid-cols-3 gap-8 items-center">
+              <div className="text-center md:text-left">
+                <div className="inline-flex items-center gap-2 mb-4">
+                  <Users className="w-6 h-6 text-blue-400" />
+                  <span className="text-sm font-semibold text-gray-300">Growing Community</span>
+                </div>
+                <h3 className="text-3xl md:text-4xl font-bold mb-2">
+                  Join the Movement
+                </h3>
+                <p className="text-gray-400">
+                  Used by developers at top tech companies worldwide
+                </p>
+              </div>
+              <div className="grid grid-cols-3 gap-4 md:col-span-2">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-blue-400 mb-1">100K+</div>
+                  <div className="text-sm text-gray-400">Active Users</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-purple-400 mb-1">1M+</div>
+                  <div className="text-sm text-gray-400">Tools Used</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-pink-400 mb-1">50+</div>
+                  <div className="text-sm text-gray-400">Free Tools</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
