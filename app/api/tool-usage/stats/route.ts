@@ -14,7 +14,7 @@ export async function GET() {
 
     // Convert to a more usable format
     const stats: Record<string, number> = {};
-    toolUsageStats.forEach(stat => {
+    toolUsageStats.forEach((stat: { toolName: string; _count: { toolName: number } }) => {
       stats[stat.toolName] = stat._count.toolName;
     });
 
