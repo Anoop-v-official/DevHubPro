@@ -5,6 +5,16 @@
       "static/chunks/main-app.js",
       "static/chunks/app/global-error.js"
     ],
+    "/error": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/error.js"
+    ],
+    "/not-found": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/not-found.js"
+    ],
     "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -16,15 +26,100 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/not-found": [
+    "/playground/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
+      "static/chunks/app/playground/page.js"
     ],
-    "/error": [
+    "/tools/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/error.js"
+      "static/chunks/app/tools/page.js"
+    ],
+    "/tools/online-tools/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/online-tools/page.js"
+    ],
+    "/tools/hash-generator/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/hash-generator/page.js"
+    ],
+    "/tools/css-minifier/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/css-minifier/page.js"
+    ],
+    "/tools/payload-encoder/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/payload-encoder/page.js"
+    ],
+    "/tools/regex-tester/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/regex-tester/page.js"
+    ],
+    "/tools/base64-converter/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/base64-converter/page.js"
+    ],
+    "/tools/html-formatter/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/html-formatter/page.js"
+    ],
+    "/tools/markdown-to-html/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/markdown-to-html/page.js"
+    ],
+    "/tools/url-encoder/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/url-encoder/page.js"
+    ],
+    "/tools/border-radius/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/border-radius/page.js"
+    ],
+    "/tools/html-entity-encoder/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/html-entity-encoder/page.js"
+    ],
+    "/tools/cron-builder/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/cron-builder/page.js"
+    ],
+    "/tools/cidr-calculator/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/cidr-calculator/page.js"
+    ],
+    "/tools/reverse-shell/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/reverse-shell/page.js"
+    ],
+    "/tools/password-analyzer/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/password-analyzer/page.js"
+    ],
+    "/tools/htaccess/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/htaccess/page.js"
+    ],
+    "/tools/uuid-generator/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/tools/uuid-generator/page.js"
     ]
   }
 }

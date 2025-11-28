@@ -212,3 +212,23 @@ model Vote {
   @@unique([userId, errorAnswerId])
   @@index([userId])
 }
+
+// Site Statistics
+model SiteStats {
+  id            String   @id @default(cuid())
+  totalVisitors Int      @default(0)
+  totalToolsUsed Int     @default(0)
+  updatedAt     DateTime @updatedAt
+}
+
+// Page Visits Tracking
+model PageVisit {
+  id        String   @id @default(cuid())
+  ipAddress String
+  userAgent String?
+  page      String
+  visitedAt DateTime @default(now())
+
+  @@index([visitedAt])
+  @@index([ipAddress])
+}

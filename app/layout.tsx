@@ -2,16 +2,19 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
+import NewsTicker from '@/components/NewsTicker'
 import Footer from '@/components/Footer'
 import ScrollToTop from '@/components/ScrollToTop'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import AuthProvider from '@/components/AuthProvider'
+import { AuthContextProvider } from '@/components/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'DevHub Pro - Free Developer Tools & Resources',
-  description: 'Access 50+ free developer tools, tech comparisons, error solutions, and AI prompts. Your complete development toolkit.',
+  description: 'Access 50+ free developer tools, error solutions, cheatsheets, code playground, and AI prompts. Your complete development toolkit.',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
 }
 
 export default function RootLayout({
@@ -24,12 +27,15 @@ export default function RootLayout({
       <body className={inter.className} suppressHydrationWarning>
         <AuthProvider>
           <ThemeProvider>
-            <Navigation />
-            <main className="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors">
-              {children}
-            </main>
-            <Footer />
-            <ScrollToTop />
+            <AuthContextProvider>
+              <Navigation />
+              <NewsTicker />
+              <main className="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors">
+                {children}
+              </main>
+              <Footer />
+              <ScrollToTop />
+            </AuthContextProvider>
           </ThemeProvider>
         </AuthProvider>
       </body>

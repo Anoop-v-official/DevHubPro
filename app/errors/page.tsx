@@ -1,13 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { Search, Plus, TrendingUp, MessageSquare, Eye, CheckCircle, ArrowUp, ArrowDown, Clock, Filter, Tag } from 'lucide-react';
+import { useAuth } from '@/components/AuthContext';
 
 export default function ErrorsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState<'all' | 'unanswered' | 'popular' | 'recent'>('all');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const { openAuthModal } = useAuth();
 
   // Sample error questions data (in a real app, this would come from a database)
   const questions = [
@@ -149,13 +150,13 @@ export default function ErrorsPage() {
                 Get help with your coding errors from the community
               </p>
             </div>
-            <Link
-              href="/submit-error"
+            <button
+              onClick={openAuthModal}
               className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:scale-105 transition-transform shadow-lg hover:shadow-glow whitespace-nowrap"
             >
               <Plus className="w-5 h-5" />
               Ask Question
-            </Link>
+            </button>
           </div>
 
           {/* Search Bar */}
@@ -260,13 +261,13 @@ export default function ErrorsPage() {
               {filteredQuestions.length === 0 ? (
                 <div className="text-center py-12 bg-white dark:bg-gray-950 rounded-xl border border-gray-200 dark:border-gray-800">
                   <p className="text-gray-600 dark:text-gray-400 mb-4">No questions found matching your criteria</p>
-                  <Link
-                    href="/submit-error"
+                  <button
+                    onClick={openAuthModal}
                     className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:scale-105 transition-transform"
                   >
                     <Plus className="w-5 h-5" />
                     Ask the First Question
-                  </Link>
+                  </button>
                 </div>
               ) : (
                 filteredQuestions.map((question) => (
@@ -307,7 +308,10 @@ export default function ErrorsPage() {
                       {/* Question Content */}
                       <div className="flex-1">
                         <div className="flex items-start justify-between gap-4 mb-3">
-                          <h3 className="text-lg font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 cursor-pointer">
+                          <h3
+                            onClick={() => alert(`Viewing question: "${question.title}"\n\nThis feature is coming soon! Sign in to ask and answer questions.`)}
+                            className="text-lg font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 cursor-pointer"
+                          >
                             {question.title}
                           </h3>
                           {question.bounty && (
@@ -445,12 +449,12 @@ export default function ErrorsPage() {
                 <li>• Add relevant tags</li>
                 <li>• Show what you've tried</li>
               </ul>
-              <Link
-                href="/submit-error"
-                className="mt-4 block text-center px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors font-semibold text-sm"
+              <button
+                onClick={openAuthModal}
+                className="mt-4 w-full text-center px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors font-semibold text-sm"
               >
                 Ask Question
-              </Link>
+              </button>
             </div>
           </div>
         </div>

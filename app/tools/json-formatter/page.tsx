@@ -3,8 +3,12 @@
 import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 import Link from 'next/link';
+import { useToolTracking } from '@/hooks/useToolTracking';
 
 export default function JSONFormatterPage() {
+  // Track usage of this tool
+  useToolTracking('JSON Formatter', '/tools/json-formatter');
+
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [error, setError] = useState('');

@@ -3,72 +3,398 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { BookOpen, Clock, Calendar, TrendingUp, Star, X, Plus } from 'lucide-react';
+import { useAuth } from '@/components/AuthContext';
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedPost, setSelectedPost] = useState<any>(null);
+  const { openAuthModal } = useAuth();
 
   const posts = [
     {
       id: 'javascript-tips',
-      title: '10 JavaScript Tips Every Developer Should Know',
+      title: '10 JavaScript Tips Every Developer Should Know in 2024',
       date: '2024-01-15',
       category: 'JavaScript',
-      readTime: '5 min',
-      excerpt: 'Master these essential JavaScript techniques to write cleaner, more efficient code.',
-      author: 'DevHub Team',
+      readTime: '8 min',
+      excerpt: 'Master essential JavaScript techniques including optional chaining, nullish coalescing, destructuring, and modern ES6+ features to write cleaner, more efficient code.',
+      author: 'Sarah Johnson',
       views: '12.5K',
-      popular: true
+      popular: true,
+      content: `Modern JavaScript has evolved significantly. Here are 10 essential tips:
+
+1. **Optional Chaining (?.)** - Safely access nested object properties without checking each level
+2. **Nullish Coalescing (??)** - Better default values than || operator
+3. **Array Methods** - map(), filter(), reduce() for functional programming
+4. **Async/Await** - Cleaner asynchronous code than promises
+5. **Destructuring** - Extract values from objects and arrays elegantly
+6. **Spread Operator** - Copy and merge objects/arrays efficiently
+7. **Template Literals** - Better string interpolation and multi-line strings
+8. **Arrow Functions** - Concise function syntax with lexical 'this'
+9. **Modules** - import/export for better code organization
+10. **let/const** - Block-scoped variables instead of var`
     },
     {
-      title: 'Getting Started with Next.js 14',
+      id: 'nextjs-14',
+      title: 'Getting Started with Next.js 14: Complete Guide',
       date: '2024-01-12',
       category: 'React',
-      readTime: '8 min',
-      excerpt: 'Learn the latest features in Next.js 14 including Server Components and App Router.',
-      author: 'DevHub Team',
+      readTime: '10 min',
+      excerpt: 'Learn the latest features in Next.js 14 including Server Components, App Router, Server Actions, and streaming. Build faster, more efficient React applications.',
+      author: 'Michael Chen',
       views: '10.2K',
-      popular: true
+      popular: true,
+      content: `Next.js 14 introduces game-changing features:
+
+**Server Components**
+- Reduce client-side JavaScript bundle size
+- Fetch data directly on the server
+- Better SEO and initial page load
+
+**App Router**
+- File-based routing with layouts
+- Nested routes and loading states
+- Error boundaries built-in
+
+**Server Actions**
+- Mutations without API routes
+- Type-safe form submissions
+- Progressive enhancement
+
+**Streaming**
+- Instant page loading with Suspense
+- Load UI components as they're ready
+- Better user experience
+
+Get started today and build the next generation of React apps!`
     },
     {
-      title: 'Python vs JavaScript: Complete Comparison 2024',
+      id: 'python-vs-javascript',
+      title: 'Python vs JavaScript: Complete Career Comparison 2024',
       date: '2024-01-10',
       category: 'Career',
-      readTime: '6 min',
-      excerpt: 'Comprehensive guide to choosing between Python and JavaScript for your career.',
+      readTime: '12 min',
+      excerpt: 'Comprehensive comparison of Python and JavaScript ecosystems, job markets, salaries, learning curves, and use cases to help you choose the right path.',
       author: 'DevHub Team',
       views: '8.7K',
-      popular: true
+      popular: true,
+      content: `Choosing between Python and JavaScript? Here's what you need to know:
+
+**Python Strengths:**
+- Data Science & ML (NumPy, Pandas, TensorFlow)
+- Backend Development (Django, Flask, FastAPI)
+- Automation & Scripting
+- Scientific Computing
+- Average Salary: $110k - $150k
+
+**JavaScript Strengths:**
+- Full-Stack Development (Node.js + React)
+- Frontend Development (React, Vue, Angular)
+- Real-time Applications
+- Mobile Apps (React Native)
+- Average Salary: $105k - $145k
+
+**Learning Curve:**
+Python is generally easier for beginners with cleaner syntax. JavaScript requires understanding of async programming and DOM manipulation.
+
+**Job Market:**
+Both have excellent opportunities. Python dominates in AI/ML, while JavaScript leads in web development.
+
+**Verdict:** Learn both! Start with Python for easier syntax, then add JavaScript for full-stack capabilities.`
     },
     {
-      title: 'Docker Best Practices for Production',
+      id: 'docker-best-practices',
+      title: 'Docker Best Practices for Production in 2024',
       date: '2024-01-08',
       category: 'DevOps',
-      readTime: '10 min',
-      excerpt: 'Essential Docker practices for deploying containerized applications at scale.',
-      author: 'DevHub Team',
+      readTime: '15 min',
+      excerpt: 'Essential Docker practices for production: multi-stage builds, security hardening, image optimization, health checks, and deployment strategies at scale.',
+      author: 'Alex Kumar',
       views: '7.3K',
-      popular: false
+      popular: false,
+      content: `Production Docker requires careful planning. Follow these best practices:
+
+**1. Multi-Stage Builds**
+- Separate build and runtime dependencies
+- Reduce final image size by 80%+
+- Faster deployments and lower costs
+
+**2. Security**
+- Use official base images
+- Run as non-root user
+- Scan for vulnerabilities
+- Keep images updated
+
+**3. Image Optimization**
+- Use .dockerignore
+- Minimize layers
+- Cache dependencies properly
+- Use Alpine for smaller size
+
+**4. Health Checks**
+- Implement liveness probes
+- Add readiness checks
+- Monitor container health
+
+**5. Docker Compose**
+- Define services clearly
+- Use environment variables
+- Network isolation
+- Volume management
+
+**6. Best Practices**
+- One process per container
+- Immutable infrastructure
+- Log to stdout/stderr
+- Use docker-compose for local dev
+
+Deploy with confidence using these battle-tested practices!`
     },
     {
-      title: 'API Security: OWASP Top 10 Guide',
+      id: 'api-security-owasp',
+      title: 'API Security: Complete OWASP Top 10 Guide 2024',
       date: '2024-01-05',
       category: 'Security',
-      readTime: '12 min',
-      excerpt: 'Protect your APIs from common vulnerabilities with these security best practices.',
-      author: 'DevHub Team',
+      readTime: '18 min',
+      excerpt: 'Protect your APIs from the OWASP Top 10 vulnerabilities: broken authentication, injection attacks, security misconfigurations, and more with practical examples.',
+      author: 'Jessica Martinez',
       views: '6.8K',
-      popular: false
+      popular: false,
+      content: `API security is critical. Here's the OWASP API Security Top 10:
+
+**1. Broken Object Level Authorization**
+- Always verify user owns requested resource
+- Implement proper authorization checks
+- Use UUIDs instead of sequential IDs
+
+**2. Broken Authentication**
+- Implement JWT properly
+- Use secure session management
+- Enable MFA where possible
+- Rate limit authentication endpoints
+
+**3. Broken Object Property Level Authorization**
+- Validate all input properties
+- Use allow-lists, not deny-lists
+- Implement proper field-level access control
+
+**4. Unrestricted Resource Consumption**
+- Implement rate limiting
+- Set request size limits
+- Timeout long-running requests
+- Use pagination for large datasets
+
+**5. Broken Function Level Authorization**
+- Check permissions for every endpoint
+- Separate admin routes
+- Validate user roles
+
+**6. Unrestricted Access to Sensitive Business Flows**
+- Add CAPTCHA for sensitive operations
+- Implement step-up authentication
+- Monitor for suspicious patterns
+
+**7. Server Side Request Forgery (SSRF)**
+- Validate and sanitize URLs
+- Use allow-lists for external requests
+- Disable unnecessary protocols
+
+**8. Security Misconfiguration**
+- Remove default credentials
+- Disable debug mode in production
+- Keep dependencies updated
+- Use security headers
+
+**9. Improper Inventory Management**
+- Document all API endpoints
+- Version your APIs
+- Remove deprecated endpoints
+- Monitor API usage
+
+**10. Unsafe Consumption of APIs**
+- Validate third-party API responses
+- Encrypt sensitive data in transit
+- Implement timeouts
+- Handle errors gracefully
+
+Implement these controls to secure your APIs!`
     },
     {
-      title: 'Building Microservices with Node.js',
+      id: 'microservices-nodejs',
+      title: 'Building Scalable Microservices with Node.js',
       date: '2024-01-03',
       category: 'Backend',
-      readTime: '15 min',
-      excerpt: 'Step-by-step guide to architecting and building scalable microservices.',
-      author: 'DevHub Team',
+      readTime: '20 min',
+      excerpt: 'Comprehensive guide to architecting and building production-ready microservices with Node.js, Docker, message queues, and service discovery.',
+      author: 'Robert Williams',
       views: '5.9K',
-      popular: false
+      popular: false,
+      content: `Build enterprise-grade microservices with Node.js:
+
+**Architecture Principles:**
+- Single Responsibility: One service, one job
+- Loose Coupling: Independent services
+- High Cohesion: Related functionality together
+- API Gateway: Central entry point
+
+**Key Components:**
+
+1. **Service Structure**
+   - Express.js or Fastify for HTTP
+   - Separate routes, controllers, services
+   - Validation layer (Joi, Yup)
+   - Error handling middleware
+
+2. **Database Per Service**
+   - Each service owns its data
+   - No shared databases
+   - Use PostgreSQL, MongoDB, Redis
+
+3. **Inter-Service Communication**
+   - REST APIs for synchronous
+   - Message queues (RabbitMQ, Kafka) for async
+   - gRPC for high-performance
+   - Event-driven architecture
+
+4. **Service Discovery**
+   - Consul or Eureka
+   - Health check endpoints
+   - Load balancing
+
+5. **Monitoring & Logging**
+   - Centralized logging (ELK Stack)
+   - Distributed tracing (Jaeger)
+   - Metrics (Prometheus, Grafana)
+   - APM tools (New Relic, Datadog)
+
+6. **Security**
+   - JWT authentication
+   - API Gateway for auth
+   - Service mesh (Istio)
+   - Encrypt inter-service communication
+
+**Best Practices:**
+- Circuit breakers for resilience
+- Retry mechanisms with exponential backoff
+- Graceful degradation
+- Feature flags
+- Automated testing (unit, integration, e2e)
+
+**Deployment:**
+- Docker containers
+- Kubernetes orchestration
+- CI/CD pipelines
+- Blue-green deployments
+
+Start small, scale as needed!`
+    },
+    {
+      id: 'react-hooks-advanced',
+      title: 'Advanced React Hooks Patterns You Should Know',
+      date: '2023-12-28',
+      category: 'React',
+      readTime: '14 min',
+      excerpt: 'Master advanced React Hooks patterns: useCallback optimization, custom hooks, useReducer for complex state, and composition patterns for reusable logic.',
+      author: 'Emily Davis',
+      views: '9.1K',
+      popular: true,
+      content: `Level up your React skills with these advanced hooks patterns:
+
+**1. Custom Hooks for Reusability**
+- Extract common logic
+- Share stateful logic across components
+- Compose hooks together
+
+**2. useCallback & useMemo**
+- Prevent unnecessary re-renders
+- Optimize expensive computations
+- Memoize callback functions
+
+**3. useReducer for Complex State**
+- Better than useState for complex logic
+- Predictable state updates
+- Easy to test
+
+**4. useContext for Global State**
+- Avoid prop drilling
+- Share data across components
+- Combine with useReducer
+
+**5. useRef Beyond DOM**
+- Store mutable values
+- Keep previous values
+- Avoid re-renders
+
+**6. useLayoutEffect**
+- Synchronous DOM updates
+- Measure DOM elements
+- Prevent visual glitches
+
+**Common Patterns:**
+- Data fetching hooks
+- Form handling hooks
+- Window size hooks
+- Local storage hooks
+- Debounce/throttle hooks
+
+Write cleaner, more maintainable React code!`
+    },
+    {
+      id: 'typescript-tips',
+      title: 'TypeScript Best Practices for Large Applications',
+      date: '2023-12-25',
+      category: 'JavaScript',
+      readTime: '16 min',
+      excerpt: 'Essential TypeScript patterns for enterprise applications: strict mode, utility types, generics, type guards, and project organization.',
+      author: 'David Park',
+      views: '7.5K',
+      popular: false,
+      content: `Build better TypeScript applications:
+
+**Strict Mode Configuration:**
+- Enable strict mode in tsconfig.json
+- noImplicitAny for type safety
+- strictNullChecks for null safety
+- strictFunctionTypes for better type checking
+
+**Utility Types:**
+- Partial<T> for optional properties
+- Required<T> for required properties
+- Pick<T, K> to select properties
+- Omit<T, K> to exclude properties
+- Record<K, T> for object types
+
+**Generics:**
+- Create reusable components
+- Type-safe functions
+- Constrain types with extends
+
+**Type Guards:**
+- typeof for primitives
+- instanceof for classes
+- Custom type predicates
+- Discriminated unions
+
+**Advanced Patterns:**
+- Mapped types for transformations
+- Conditional types for logic
+- Template literal types
+- Decorators for metadata
+
+**Project Organization:**
+- Separate types folder
+- Shared types package
+- Avoid type assertions
+- Use unknown over any
+
+**Best Practices:**
+- Write interfaces for objects
+- Use type for unions/intersections
+- Prefer const assertions
+- Enable incremental compilation
+- Use path mapping
+
+Build type-safe, maintainable applications!`
     },
   ];
 
@@ -92,13 +418,13 @@ export default function BlogPage() {
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-6">
             Tips, tutorials, and insights for modern developers
           </p>
-          <a
-            href="mailto:contact@devhubpro.com?subject=Article Submission"
+          <button
+            onClick={openAuthModal}
             className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:scale-105 transition-transform shadow-lg hover:shadow-glow"
           >
             <Plus className="w-5 h-5" />
             Submit Article
-          </a>
+          </button>
         </div>
 
         {/* Category Filter */}
@@ -123,6 +449,7 @@ export default function BlogPage() {
           {filteredPosts.map((post, index) => (
             <article
               key={index}
+              onClick={() => setSelectedPost(post)}
               className="card p-8 hover:scale-[1.02] transition-transform cursor-pointer animate-slide-up"
               style={{ animationDelay: `${index * 50}ms` }}
             >
@@ -191,13 +518,13 @@ export default function BlogPage() {
           <p className="text-lg text-blue-100 dark:text-blue-200 mb-6">
             Share your knowledge with the developer community
           </p>
-          <a
-            href="mailto:contact@devhubpro.com?subject=Article Submission"
+          <button
+            onClick={openAuthModal}
             className="btn bg-white text-purple-600 hover:bg-gray-100 font-bold shadow-xl hover:shadow-2xl inline-flex items-center gap-2"
           >
             <Plus className="w-5 h-5" />
             Submit Article
-          </a>
+          </button>
         </div>
 
         {/* Blog Post Modal */}

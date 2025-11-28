@@ -17,7 +17,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-gray-400 dark:text-gray-500 leading-relaxed mb-6">
-              Your complete toolkit for modern development. 50+ free tools, tech comparisons, error solutions, and resources trusted by 100K+ developers worldwide.
+              Your complete toolkit for modern development. 50+ free tools, error solutions, cheatsheets, and resources trusted by developers worldwide.
             </p>
             <div className="flex space-x-4">
               <a
@@ -110,15 +110,21 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/compare" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
+                <Link href="/playground" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
                   <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
-                  Tech Comparisons
+                  Code Playground
                 </Link>
               </li>
               <li>
                 <Link href="/errors" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
                   <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
                   Error Solutions
+                </Link>
+              </li>
+              <li>
+                <Link href="/prompts" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
+                  <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                  AI Prompts
                 </Link>
               </li>
             </ul>
@@ -129,40 +135,28 @@ export default function Footer() {
             <h3 className="font-bold text-white mb-4 text-sm uppercase tracking-wider">Company</h3>
             <ul className="space-y-2">
               <li>
-                <a href="mailto:contact@devhubpro.com" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
+                <Link href="/resume" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
                   <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
-                  Contact
-                </a>
-              </li>
-              <li>
-                <a href="mailto:contact@devhubpro.com?subject=Tool Request" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
-                  <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
-                  Request Tool
-                </a>
-              </li>
-              <li>
-                <Link href="/submit-error" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
-                  <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
-                  Submit Error
+                  Resume Builder
                 </Link>
               </li>
               <li>
-                <a href="mailto:contact@devhubpro.com?subject=Article Submission" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
+                <a href="mailto:contact@devhubpro.com" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
+                  <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <Link href="/blog" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
                   <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
                   Submit Article
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="mailto:contact@devhubpro.com?subject=Newsletter Subscription" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
+                <Link href="/errors" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
                   <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
-                  Newsletter
-                </a>
-              </li>
-              <li>
-                <a href="mailto:contact@devhubpro.com?subject=Feedback" className="text-gray-400 hover:text-blue-400 transition-colors text-sm flex items-center group">
-                  <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
-                  Feedback
-                </a>
+                  Ask Question
+                </Link>
               </li>
             </ul>
           </div>

@@ -1,7 +1,70 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Zap, Shield, TrendingUp, Star, BookOpen, AlertCircle, GitCompare, FileCode, Sparkles, Code, Users, Mail } from 'lucide-react';
+import { ArrowRight, Zap, Shield, TrendingUp, Star, BookOpen, AlertCircle, FileCode, Sparkles, Code, Users, Mail } from 'lucide-react';
+
+interface VisitorStats {
+  totalVisitors: number;
+  monthlyVisitors: number;
+  totalToolsUsed: number;
+  totalUsers: number;
+  userRating: number;
+}
 
 export default function Home() {
+  const [stats, setStats] = useState<VisitorStats>({
+    totalVisitors: 0,
+    monthlyVisitors: 0,
+    totalToolsUsed: 0,
+    totalUsers: 0,
+    userRating: 4.9
+  });
+  const [loading, setLoading] = useState(true);
+  const [toolUsage, setToolUsage] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    // Fetch visitor statistics
+    const fetchStats = async () => {
+      try {
+        const response = await fetch('/api/visitors');
+        const data = await response.json();
+        setStats(data);
+      } catch (error) {
+        console.error('Error fetching visitor stats:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // Fetch tool usage statistics
+    const fetchToolUsage = async () => {
+      try {
+        const response = await fetch('/api/tool-usage/stats');
+        const data = await response.json();
+        setToolUsage(data);
+      } catch (error) {
+        console.error('Error fetching tool usage:', error);
+      }
+    };
+
+    fetchStats();
+    fetchToolUsage();
+
+    // Track this page visit
+    fetch('/api/visitors', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ page: '/' })
+    }).catch(err => console.error('Error tracking visit:', err));
+  }, []);
+
+  // Get usage count for a tool
+  const getUsageCount = (toolName: string): string => {
+    const count = toolUsage[toolName] || 0;
+    if (count === 0) return '0';
+    return formatNumber(count);
+  };
   const featuredTools = [
     {
       name: 'JSON Formatter',
@@ -9,7 +72,6 @@ export default function Home() {
       href: '/tools/json-formatter',
       icon: '📋',
       color: 'from-blue-500 to-cyan-500',
-      usageCount: '45.2K',
       rank: 1
     },
     {
@@ -18,7 +80,6 @@ export default function Home() {
       href: '/tools/jwt-decoder',
       icon: '🔐',
       color: 'from-purple-500 to-pink-500',
-      usageCount: '38.7K',
       rank: 2
     },
     {
@@ -27,7 +88,6 @@ export default function Home() {
       href: '/tools/base64-converter',
       icon: '🔄',
       color: 'from-orange-500 to-red-500',
-      usageCount: '32.1K',
       rank: 3
     },
     {
@@ -36,7 +96,6 @@ export default function Home() {
       href: '/tools/ssh-keygen',
       icon: '🔑',
       color: 'from-indigo-500 to-blue-500',
-      usageCount: '24.3K',
       rank: 5
     },
     {
@@ -45,7 +104,6 @@ export default function Home() {
       href: '/tools/password-analyzer',
       icon: '🛡️',
       color: 'from-green-500 to-teal-500',
-      usageCount: '22.8K',
       rank: 6
     },
     {
@@ -54,7 +112,6 @@ export default function Home() {
       href: '/tools/cidr-calculator',
       icon: '🌐',
       color: 'from-cyan-500 to-blue-500',
-      usageCount: '17.2K',
       rank: 8
     },
   ];
@@ -77,11 +134,18 @@ export default function Home() {
     }
   ];
 
-  const stats = [
+  // Format number with K/M suffix
+  const formatNumber = (num: number) => {
+    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M+`;
+    if (num >= 1000) return `${(num / 1000).toFixed(1)}K+`;
+    return num.toString();
+  };
+
+  const displayStats = [
     { value: '50+', label: 'Free Tools' },
-    { value: '100k+', label: 'Monthly Users' },
-    { value: '1M+', label: 'Tools Used' },
-    { value: '4.9/5', label: 'User Rating' },
+    { value: loading ? '...' : formatNumber(stats.monthlyVisitors), label: 'Monthly Visitors' },
+    { value: loading ? '...' : formatNumber(stats.totalToolsUsed || 0), label: 'Tools Used' },
+    { value: `${stats.userRating}/5`, label: 'User Rating' },
   ];
 
   return (
@@ -97,7 +161,9 @@ export default function Home() {
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center space-x-2 glass rounded-full px-5 py-2.5 mb-8 animate-fade-in border border-white/20">
               <Star className="w-4 h-4 text-yellow-300 animate-pulse" />
-              <span className="text-sm font-semibold">Trusted by 100,000+ developers</span>
+              <span className="text-sm font-semibold">
+                {loading ? 'Trusted by developers worldwide' : `Trusted by ${formatNumber(stats.totalVisitors)} developers`}
+              </span>
             </div>
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight animate-slide-up">
@@ -109,7 +175,7 @@ export default function Home() {
             </h1>
 
             <p className="text-xl md:text-2xl mb-10 text-blue-100 dark:text-blue-200 max-w-3xl mx-auto animate-slide-up leading-relaxed">
-              Empowering Backend, Frontend, DevOps, Network Engineers, and all IT Professionals with 50+ free tools, comparisons, solutions, and resources.
+              Empowering Backend, Frontend, DevOps, Network Engineers, and all IT Professionals with 50+ free tools, solutions, and resources.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
@@ -121,10 +187,10 @@ export default function Home() {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                href="/compare"
+                href="/playground"
                 className="btn btn-outline text-white border-white hover:bg-white hover:text-purple-600 text-lg"
               >
-                Tech Comparisons
+                Code Playground
               </Link>
             </div>
           </div>
@@ -142,7 +208,7 @@ export default function Home() {
       <section className="py-16 bg-white dark:bg-gray-950">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
+            {displayStats.map((stat, index) => (
               <div key={index} className="text-center group">
                 <div className="text-4xl md:text-5xl font-bold gradient-text mb-2 group-hover:scale-110 transition-transform">{stat.value}</div>
                 <div className="text-gray-600 dark:text-gray-400 font-medium">{stat.label}</div>
@@ -190,7 +256,7 @@ export default function Home() {
                 <div className="flex items-center gap-2 mt-auto pt-3 border-t border-gray-100 dark:border-gray-700">
                   <TrendingUp className="w-4 h-4 text-green-500" />
                   <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                    {tool.usageCount} uses
+                    {getUsageCount(tool.name)} uses
                   </span>
                 </div>
               </Link>
@@ -265,7 +331,7 @@ export default function Home() {
               </p>
               <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
                 <TrendingUp className="w-4 h-4 text-green-500" />
-                <span>12.5K reads</span>
+                <span>Trending</span>
               </div>
             </Link>
 
@@ -303,20 +369,20 @@ export default function Home() {
               </div>
             </Link>
 
-            {/* Popular Comparison */}
-            <Link href="/compare" className="card card-hover p-6 group">
+            {/* Popular Playground */}
+            <Link href="/playground" className="card card-hover p-6 group">
               <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-green-600 to-teal-600 rounded-xl mb-4 group-hover:scale-110 transition-transform">
-                <GitCompare className="w-7 h-7 text-white" />
+                <Code className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
-                Top Comparison
+                Code Playground
               </h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
-                React vs Vue - Complete Framework Guide
+                Interactive code editor supporting multiple languages
               </p>
               <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
                 <TrendingUp className="w-4 h-4 text-green-500" />
-                <span>28K views</span>
+                <span>15K uses</span>
               </div>
             </Link>
           </div>
@@ -448,7 +514,7 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-                "The tech comparisons helped me make informed decisions for my projects. Well-researched content with practical insights."
+                "The comprehensive tutorials and error solutions helped me solve complex problems quickly. Well-researched content with practical insights."
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-pink-600 to-orange-600 rounded-full flex items-center justify-center text-white font-bold">
@@ -510,11 +576,15 @@ export default function Home() {
               </div>
               <div className="grid grid-cols-3 gap-4 md:col-span-2">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-400 mb-1">100K+</div>
-                  <div className="text-sm text-gray-400">Active Users</div>
+                  <div className="text-3xl font-bold text-blue-400 mb-1">
+                    {loading ? '...' : formatNumber(stats.totalVisitors)}
+                  </div>
+                  <div className="text-sm text-gray-400">Total Visitors</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400 mb-1">1M+</div>
+                  <div className="text-3xl font-bold text-purple-400 mb-1">
+                    {loading ? '...' : formatNumber(stats.totalToolsUsed || 0)}
+                  </div>
                   <div className="text-sm text-gray-400">Tools Used</div>
                 </div>
                 <div className="text-center">
@@ -538,7 +608,10 @@ export default function Home() {
             Ready to Supercharge Your Development?
           </h2>
           <p className="text-xl mb-10 text-blue-100 dark:text-blue-200 max-w-2xl mx-auto">
-            Join 100,000+ developers using DevHub Pro every day
+            {loading
+              ? 'Join developers worldwide using DevHub Pro every day'
+              : `Join ${formatNumber(stats.totalVisitors)} developers using DevHub Pro`
+            }
           </p>
           <Link
             href="/tools"

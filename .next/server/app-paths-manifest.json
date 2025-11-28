@@ -1,4 +1,13 @@
 {
+  "/tools/page": "app/tools/page.js",
+  "/tools/cidr-calculator/page": "app/tools/cidr-calculator/page.js",
+  "/tools/password-analyzer/page": "app/tools/password-analyzer/page.js",
+  "/tools/online-tools/page": "app/tools/online-tools/page.js",
+  "/tools/htaccess/page": "app/tools/htaccess/page.js",
+  "/api/tool-usage/track/route": "app/api/tool-usage/track/route.js",
+  "/api/tool-usage/stats/route": "app/api/tool-usage/stats/route.js",
+  "/tools/uuid-generator/page": "app/tools/uuid-generator/page.js",
+  "/api/news/route": "app/api/news/route.js",
   "/page": "app/page.js",
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js"
+  "/api/visitors/route": "app/api/visitors/route.js"
 }
