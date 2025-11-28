@@ -1,8 +1,10 @@
 {
   "/tools/page": "app/tools/page.js",
-  "/tools/password-analyzer/page": "app/tools/password-analyzer/page.js",
   "/tools/online-tools/page": "app/tools/online-tools/page.js",
-  "/tools/htaccess/page": "app/tools/htaccess/page.js",
   "/page": "app/page.js",
-  "/api/visitors/route": "app/api/visitors/route.js"
+  "/tools/password-analyzer/page": "app/tools/password-analyzer/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/not-found": "app/not-found.js",
+  "/tools/htaccess/page": "app/tools/htaccess/page.js",
+  "/blog/page": "app/blog/page.js"
 }
