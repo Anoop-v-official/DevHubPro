@@ -145,7 +145,7 @@ export default function ToolsPage() {
     {
       name: 'SVG Optimizer',
       description: 'Optimize and compress SVG files',
-      href: '/tools/online-tools',
+      href: '/tools/svg-optimizer',
       icon: '🖼️',
       category: 'Frontend',
       popular: false,
@@ -155,7 +155,7 @@ export default function ToolsPage() {
     {
       name: 'Flexbox Generator',
       description: 'Visual CSS Flexbox layout generator',
-      href: '/tools/online-tools',
+      href: '/tools/flexbox-generator',
       icon: '📐',
       category: 'Frontend',
       popular: false,
@@ -165,7 +165,7 @@ export default function ToolsPage() {
     {
       name: 'Grid Generator',
       description: 'CSS Grid layout generator with visual interface',
-      href: '/tools/online-tools',
+      href: '/tools/grid-generator',
       icon: '🎯',
       category: 'Frontend',
       popular: false,
@@ -175,7 +175,7 @@ export default function ToolsPage() {
     {
       name: 'Meta Tag Generator',
       description: 'Generate SEO-friendly meta tags for your website',
-      href: '/tools/online-tools',
+      href: '/tools/meta-tag-generator',
       icon: '🏷️',
       category: 'Frontend',
       popular: false,
@@ -185,7 +185,7 @@ export default function ToolsPage() {
     {
       name: 'Open Graph Generator',
       description: 'Create Open Graph tags for social media sharing',
-      href: '/tools/online-tools',
+      href: '/tools/opengraph-generator',
       icon: '📱',
       category: 'Frontend',
       popular: false,
@@ -195,7 +195,7 @@ export default function ToolsPage() {
     {
       name: 'Favicon Generator',
       description: 'Generate favicons in multiple sizes for all platforms',
-      href: '/tools/online-tools',
+      href: '/tools/favicon-generator',
       icon: '🎭',
       category: 'Frontend',
       popular: false,
@@ -223,7 +223,7 @@ export default function ToolsPage() {
     {
       name: 'CSS to Tailwind',
       description: 'Convert CSS code to Tailwind CSS classes',
-      href: '/tools/online-tools',
+      href: '/tools/css-to-tailwind',
       icon: '🔀',
       category: 'Frontend',
       popular: false,
@@ -298,7 +298,7 @@ export default function ToolsPage() {
     {
       name: 'API Response Formatter',
       description: 'Format and validate API responses',
-      href: '/tools/online-tools',
+      href: '/tools/api-response-formatter',
       icon: '🔌',
       category: 'Backend',
       popular: false,
@@ -308,7 +308,7 @@ export default function ToolsPage() {
     {
       name: 'Environment Variable Generator',
       description: 'Generate .env files with secure values',
-      href: '/tools/online-tools',
+      href: '/tools/env-generator',
       icon: '🔐',
       category: 'Backend',
       popular: false,
@@ -318,7 +318,7 @@ export default function ToolsPage() {
     {
       name: 'SQL Query Builder',
       description: 'Build complex SQL queries visually',
-      href: '/tools/online-tools',
+      href: '/tools/sql-query-builder',
       icon: '🏗️',
       category: 'Backend',
       popular: false,
@@ -328,7 +328,7 @@ export default function ToolsPage() {
     {
       name: 'GraphQL Query Builder',
       description: 'Build and test GraphQL queries',
-      href: '/tools/online-tools',
+      href: '/tools/graphql-query-builder',
       icon: '⚡',
       category: 'Backend',
       popular: false,
@@ -338,7 +338,7 @@ export default function ToolsPage() {
     {
       name: 'Docker Compose Generator',
       description: 'Generate docker-compose.yml files',
-      href: '/tools/online-tools',
+      href: '/tools/docker-compose-generator',
       icon: '🐳',
       category: 'Backend',
       popular: false,

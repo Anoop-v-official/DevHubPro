@@ -57,6 +57,16 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           <p className="text-gray-600 dark:text-gray-400">
             Sign in to access all features
           </p>
+
+          {/* Registration Coming Soon Notice */}
+          <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+            <p className="text-sm font-medium text-blue-900 dark:text-blue-100">
+              📢 Registration Coming Soon!
+            </p>
+            <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
+              Currently, sign-in is available by invitation only
+            </p>
+          </div>
         </div>
 
         {/* Sign In Options */}

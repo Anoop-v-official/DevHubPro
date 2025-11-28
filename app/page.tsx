@@ -143,7 +143,7 @@ export default function Home() {
 
   const displayStats = [
     { value: '50+', label: 'Free Tools' },
-    { value: loading ? '...' : formatNumber(stats.monthlyVisitors), label: 'Monthly Visitors' },
+    { value: loading ? '...' : formatNumber(stats.totalUsers || 0), label: 'Registered Users' },
     { value: loading ? '...' : formatNumber(stats.totalToolsUsed || 0), label: 'Tools Used' },
     { value: `${stats.userRating}/5`, label: 'User Rating' },
   ];
