@@ -236,58 +236,122 @@ export default function PlaygroundPage() {
       }, 300);
     } else if (mode === 'react') {
       setTimeout(() => {
-        const source = `
-          <html>
-            <head>
-              <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"><\/script>
-              <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"><\/script>
-            </head>
-            <body>
-              <div id="root"></div>
-              <script>
-                const originalLog = console.log;
-                console.log = function(...args) {
-                  window.parent.postMessage({type: 'log', data: args.map(String)}, '*');
-                  originalLog.apply(console, args);
-                };
-                try {
-                  ${reactCode}
-                } catch(e) {
-                  console.error('Error: ' + e.message);
-                }
-              <\/script>
-            </body>
-          </html>
-        `;
-        setSrcDoc(source);
-        setIsRunning(false);
+        try {
+          const source = `
+            <html>
+              <head>
+                <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"><\/script>
+                <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"><\/script>
+                <script src="https://unpkg.com/@babel/standalone/babel.min.js"><\/script>
+              </head>
+              <body>
+                <div id="root"></div>
+                <script>
+                  const originalLog = console.log;
+                  console.log = function(...args) {
+                    window.parent.postMessage({type: 'log', data: args.map(String)}, '*');
+                    originalLog.apply(console, args);
+                  };
+                  const originalError = console.error;
+                  console.error = function(...args) {
+                    window.parent.postMessage({type: 'error', data: args.map(String)}, '*');
+                    originalError.apply(console, args);
+                  };
+                  try {
+                    // Transpile JSX to JavaScript
+                    const code = \`${reactCode.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`;
+                    const transformed = Babel.transform(code, { presets: ['react'] });
+                    eval(transformed.code);
+                  } catch(e) {
+                    console.error('Error: ' + e.message);
+                  }
+                <\/script>
+              </body>
+            </html>
+          `;
+          setSrcDoc(source);
+          setIsRunning(false);
+        } catch(e: any) {
+          setOutput([`Error: ${e.message}`]);
+          setShowConsole(true);
+          setIsRunning(false);
+        }
       }, 300);
-    } else if (mode === 'python' && pyodideReady) {
+    } else if (mode === 'python') {
+      if (!pyodideReady) {
+        setOutput(['⏳ Loading Python environment... Please wait a moment and try again.']);
+        setShowConsole(true);
+        setIsRunning(false);
+        return;
+      }
+
       try {
         const pyodide = pyodideRef.current;
+        if (!pyodide) {
+          setOutput(['❌ Python environment not loaded. Please refresh and try again.']);
+          setShowConsole(true);
+          setIsRunning(false);
+          return;
+        }
+
+        // Redirect stdout
         pyodide.runPython(`
 import sys
 from io import StringIO
 sys.stdout = StringIO()
         `);
+
+        // Run user code
         pyodide.runPython(pythonCode);
+
+        // Get output
         const stdout = pyodide.runPython('sys.stdout.getvalue()');
-        setOutput(stdout.split('\n'));
+        const lines = stdout.split('\n').filter((line: string) => line.trim() !== '');
+
+        if (lines.length > 0) {
+          setOutput(lines);
+        } else {
+          setOutput(['✅ Python code executed successfully (no output)']);
+        }
         setShowConsole(true);
       } catch (e: any) {
-        setOutput([`Error: ${e.message}`]);
+        setOutput([`❌ Python Error: ${e.message}`]);
         setShowConsole(true);
       }
       setIsRunning(false);
     } else if (mode === 'typescript') {
-      // Simple eval for TS (in real app, use TypeScript compiler)
+      // Capture console.log output
+      const logs: string[] = [];
+      const originalLog = console.log;
+      const originalError = console.error;
+
+      console.log = (...args: any[]) => {
+        logs.push(args.map(String).join(' '));
+        originalLog.apply(console, args);
+      };
+
+      console.error = (...args: any[]) => {
+        logs.push('❌ ' + args.map(String).join(' '));
+        originalError.apply(console, args);
+      };
+
       try {
+        // Execute TypeScript as JavaScript (works for most TS code)
         eval(typescriptCode);
-        setOutput(['✅ TypeScript executed (converted to JS)']);
+
+        if (logs.length > 0) {
+          setOutput(logs);
+        } else {
+          setOutput(['✅ TypeScript executed successfully']);
+        }
         setShowConsole(true);
       } catch (e: any) {
-        setOutput([`Error: ${e.message}`]);
+        setOutput([`❌ Error: ${e.message}`]);
         setShowConsole(true);
+      } finally {
+        // Restore original console methods
+        console.log = originalLog;
+        console.error = originalError;
       }
       setIsRunning(false);
     } else if (mode === 'json') {
@@ -335,14 +399,19 @@ sys.stdout = StringIO()
     }
   }, [mode]);
 
-  // Pyodide script
+  // External scripts for different modes
   const pyodideScript = mode === 'python' ? (
     <Script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js" />
+  ) : null;
+
+  const babelScript = mode === 'react' ? (
+    <Script src="https://unpkg.com/@babel/standalone/babel.min.js" />
   ) : null;
 
   return (
     <div className="min-h-screen bg-gray-950 text-white flex flex-col">
       {pyodideScript}
+      {babelScript}
 
       {/* Header */}
       <div className="border-b border-gray-800 bg-gray-900 sticky top-0 z-10">
@@ -382,11 +451,21 @@ sys.stdout = StringIO()
               </button>
               <button
                 onClick={runCode}
-                disabled={isRunning}
-                className="px-4 py-1.5 text-sm bg-green-600 hover:bg-green-700 text-white rounded-lg flex items-center gap-2 font-medium"
+                disabled={isRunning || (mode === 'python' && !pyodideReady)}
+                className={`px-4 py-1.5 text-sm rounded-lg flex items-center gap-2 font-medium ${
+                  mode === 'python' && !pyodideReady
+                    ? 'bg-yellow-600 hover:bg-yellow-700 text-white'
+                    : 'bg-green-600 hover:bg-green-700 text-white'
+                } disabled:opacity-50 disabled:cursor-not-allowed`}
               >
-                {isRunning ? <Loader className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
-                Run
+                {isRunning ? (
+                  <Loader className="w-4 h-4 animate-spin" />
+                ) : mode === 'python' && !pyodideReady ? (
+                  <Loader className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Play className="w-4 h-4" />
+                )}
+                {mode === 'python' && !pyodideReady ? 'Loading Python...' : 'Run'}
               </button>
               <button
                 onClick={copyCode}

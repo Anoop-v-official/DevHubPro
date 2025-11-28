@@ -3,5 +3,6 @@
   "/tools/password-analyzer/page": "app/tools/password-analyzer/page.js",
   "/tools/online-tools/page": "app/tools/online-tools/page.js",
   "/tools/htaccess/page": "app/tools/htaccess/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/api/visitors/route": "app/api/visitors/route.js"
 }
